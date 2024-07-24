@@ -1,0 +1,198 @@
+[7/19/2024 11:44 AM] ViC: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookSmart Learning App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>BookSmart Learning App</h1>
+        <nav>
+            <ul>
+                <li><a href="#quiz">Quiz</a></li>
+                <li><a href="#flashcards">Flashcards</a></li>
+                <li><a href="#activities">Activities</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="quiz">
+            <h2>Quiz</h2>
+            <div id="quiz-container">
+                <!-- Quiz content will go here -->
+            </div>
+            <button onclick="startQuiz()">what is databse</button>
+        </section>
+
+        <section id="flashcards">
+            <h2>Flashcards</h2>
+            <div id="flashcard-container">
+                <!-- Flashcards content will go here -->
+            </div>
+            <button onclick="showNextFlashcard()">USB,USSD</button>
+        </section>
+
+        <section id="activities">
+            <h2>Activities</h2>
+            <div id="activities-container">
+                <!-- Other activities content will go here -->
+            </div>
+            <button onclick="startActivity()">Start Activity</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 BookSmart Learning App</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+<style>
+
+[7/19/2024 11:44 AM] ViC: body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #af4c91;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 1rem;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+button {
+    background-color: #4e4caf0c;
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #455da0;
+}
+
+footer {
+    background-color: #af4c96;
+    color: black;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+</style>
+<script>
+
+[7/19/2024 11:45 AM] ViC: // Example JavaScript code to handle the quiz and flashcards functionality
+
+// Quiz Data
+const quizQuestions = [
+    {
+        question: "What is the capital of France?",
+        options: ["Berlin", "Madrid", "Paris", "Rome"],
+        answer: "Paris"
+    },
+    // Add more questions as needed
+];
+
+// Flashcards Data
+const flashcards = [
+    {
+        question: "What is the largest planet in our solar system?",
+        answer: "Jupiter"
+    },
+    // Add more flashcards as needed
+];
+
+let currentQuizIndex = 0;
+let currentFlashcardIndex = 0;
+
+// Function to start the quiz
+function startQuiz() {
+    if (currentQuizIndex < quizQuestions.length) {
+        const quizContainer = document.getElementById('quiz-container');
+        const question = quizQuestions[currentQuizIndex];
+        quizContainer.innerHTML = `
+            <p>${question.question}</p>
+            ${question.options.map((option, index) => `
+                <button onclick="submitAnswer('${option}')">${option}</button>
+            `).join('')}
+        `;
+    } else {
+        alert("Quiz completed!");
+        currentQuizIndex = 0; // Reset for next quiz attempt
+    }
+}
+
+// Function to submit quiz answer
+function submitAnswer(selectedOption) {
+    const question = quizQuestions[currentQuizIndex];
+    if (selectedOption === question.answer) {
+        alert("Correct!");
+    } else {
+        alert("Incorrect! The correct answer is " + question.answer);
+    }
+    currentQuizIndex++;
+    startQuiz(); // Load next question
+}
+
+// Function to show the next flashcard
+function showNextFlashcard() {
+    const flashcardContainer = document.getElementById('flashcard-container');
+    if (currentFlashcardIndex < flashcards.length) {
+        const flashcard = flashcards[currentFlashcardIndex];
+        flashcardContainer.innerHTML = `
+            <p>${flashcard.question}</p>
+            <button onclick="revealAnswer()">Reveal Answer</button>
+            <p id="flashcard-answer" style="display:none;">${flashcard.answer}</p>
+        `;
+    } else {
+        alert("No more flashcards!");
+        currentFlashcardIndex = 0; // Reset for next flashcard attempt
+    }
+}
+
+// Function to reveal the flashcard answer
+function revealAnswer() {
+    document.getElementById('flashcard-answer').style.display = 'block';
+}
+
+// Function to start an activity
+function startActivity() {
+    const activitiesContainer = document.getElementById('activities-container');
+    activitiesContainer.innerHTML = `
+        <p>Activity content goes here...</p>
+    `;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+[7/19/2024 12:37 PM] ViC: <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Water Meter Billing Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Smart Water Meter Billing Management</h1>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#customers">Customers</a></li>
+                <li><a href="#billing">Billing</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+            <p>Welcome to the Smart Water Meter Billing Management System.</p>
+        </section>
+
+        <section id="customers">
+            <h2>Customer Management</h2>
+            <table id="customer-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Water Usage (Liters)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Customer data will be dynamically added here -->
+                </tbody>
+            </table>
+            <button onclick="addCustomer()">Add Customer</button>
+        </section>
+
+        <section id="billing">
+            <h2>Billing</h2>
+            <div id="billing-info">
+                <!-- Billing information will be dynamically displayed here -->
+            </div>
+            <button onclick="generateBills()">Generate Bills</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Smart Water Meter Billing Management</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
+<STYLE>
+[7/19/2024 12:37 PM] ViC: body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 1rem;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+[7/19/2024 12:37 PM] ViC: // Example customer data
+let customers = [
+    { id: 1, name: "John Doe", address: "123 Main St", usage: 1200 },
+    { id: 2, name: "Jane Smith", address: "456 Oak Ave", usage: 950 },
+    { id: 3, name: "Peter Johnson", address: "789 Pine Rd", usage: 1800 }
+];
+
+// Function to display customers in the table
+function displayCustomers() {
+    const customerTableBody = document.querySelector('#customer-table tbody');
+    customerTableBody.innerHTML = ''; // Clear existing rows
+
+    customers.forEach(customer => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${customer.id}</td>
+            <td>${customer.name}</td>
+            <td>${customer.address}</td>
+            <td>${customer.usage}</td>
+        `;
+        customerTableBody.appendChild(row);
+    });
+}
+// Function to add a new customer
+function addCustomer() {
+    const newCustomer = { 
+        id: customers.length + 1, 
+        name: "New Customer", 
+        address: "New Address", 
+        usage: 0 
+    };
+    customers.push(newCustomer);
+    displayCustomers();
+}
+
+// Function to generate bills
+function generateBills() {
+    const billingInfoDiv = document.getElementById('billing-info');
+    billingInfoDiv.innerHTML = ''; // Clear existing billing info
+
+    customers.forEach(customer => {
+        const billAmount = customer.usage * 0.0015; // Example rate: $0.0015 per liter
+        const billInfo = document.createElement('p');
+        billInfo.textContent = Customer ${customer.name} (ID: ${customer.id}) - Bill Amount: $${billAmount.toFixed(2)};
+        billingInfoDiv.appendChild(billInfo);
+    });
+}
+
+// Initialize the app by displaying customers
+displayCustomers();
+</style>
